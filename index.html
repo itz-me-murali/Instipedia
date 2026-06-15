@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InstiPedia — IIT Madras Freshers Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1117; --surface: #181c27; --card: #1e2333; --border: #2a2f45;
+      --accent: #e8a045; --accent2: #3d8bcd; --accent3: #6ecf8e;
+      --text: #e8eaf0; --muted: #8891a8; --heading: #ffffff;
+      --radius: 12px; --tr: 0.22s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; font-size: 16px; line-height: 1.7; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(15,17,23,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 58px; }
+    .nav-brand { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--accent); text-decoration: none; }
+    .nav-brand span { color: var(--heading); }
+    .nav-links { display: flex; gap: 0.15rem; list-style: none; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; font-weight: 500; padding: 5px 9px; border-radius: 6px; transition: color var(--tr), background var(--tr); }
+    .nav-links a:hover { color: var(--accent); background: rgba(232,160,69,0.1); }
+
+    .hero { padding: 80px 2rem 72px; text-align: center; background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(61,139,205,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 40% at 80% 100%, rgba(232,160,69,0.12) 0%, transparent 60%); }
+    .hero-badge { display: inline-block; background: rgba(110,207,142,0.12); color: var(--accent3); border: 1px solid rgba(110,207,142,0.3); font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 700; line-height: 1.1; color: var(--heading); }
+    .hero h1 .gold { color: var(--accent); }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin: 1rem auto 2.4rem; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #0f1117; font-weight: 700; font-size: 0.95rem; padding: 12px 26px; border-radius: 8px; text-decoration: none; transition: opacity var(--tr), transform var(--tr); }
+    .hero-cta:hover { opacity: 0.88; transform: translateY(-2px); }
+    .stat-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 3rem; }
+    .stat-chip { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 20px; text-align: center; }
+    .stat-chip .num { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+    .stat-chip .lbl { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    section { max-width: 1100px; margin: 0 auto; padding: 60px 2rem; }
+    .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .sec-title { font-family: 'Sora', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--heading); margin-bottom: 0.7rem; }
+    .sec-lead { color: var(--muted); max-width: 620px; margin-bottom: 2.4rem; }
+    .sub-h { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--heading); margin: 2.5rem 0 1.2rem; }
+    hr.div { border: none; border-top: 1px solid var(--border); }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .grid-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; transition: transform var(--tr), border-color var(--tr), box-shadow var(--tr); position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity var(--tr); }
+    .card:hover { transform: translateY(-4px); border-color: rgba(232,160,69,0.4); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    .card:hover::before { opacity: 1; }
+    .card .ci { font-size: 1.6rem; margin-bottom: 12px; display: block; }
+    .card h3 { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 600; color: var(--heading); margin-bottom: 6px; }
+    .card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    .tile { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 18px; text-decoration: none; display: flex; flex-direction: column; gap: 8px; transition: transform var(--tr), border-color var(--tr); }
+    .tile:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .tile .ti { font-size: 1.8rem; }
+    .tile .tl { font-size: 0.92rem; font-weight: 600; color: var(--heading); }
+    .tile .td { font-size: 0.78rem; color: var(--muted); }
+
+    .ib { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; }
+    .ib h4 { font-family: 'Sora', sans-serif; font-weight: 600; color: var(--accent); font-size: 0.95rem; margin-bottom: 10px; }
+    .ib ul { list-style: none; }
+    .ib ul li { font-size: 0.87rem; color: var(--muted); padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; gap: 7px; }
+    .ib ul li:last-child { border: none; }
+    .ib ul li::before { content: '›'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    .tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin: 6px 3px 0 0; }
+    .tg { background: rgba(232,160,69,0.15); color: var(--accent); border: 1px solid rgba(232,160,69,0.3); }
+    .tb { background: rgba(61,139,205,0.15); color: var(--accent2); border: 1px solid rgba(61,139,205,0.3); }
+    .tn { background: rgba(110,207,142,0.15); color: var(--accent3); border: 1px solid rgba(110,207,142,0.3); }
+
+    /* FOOD OUTLET GRID */
+    .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .food-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+    .food-card .fname { font-weight: 600; color: var(--heading); font-size: 0.92rem; margin-bottom: 4px; }
+    .food-card .fcuisine { font-size: 0.78rem; color: var(--accent); margin-bottom: 6px; }
+    .food-card .floc { font-size: 0.78rem; color: var(--muted); }
+
+    /* NEW OUTLET BANNER */
+    .new-banner { background: linear-gradient(135deg, rgba(232,160,69,0.12), rgba(61,139,205,0.1)); border: 1px solid rgba(232,160,69,0.3); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 1.5rem; }
+    .new-banner h4 { font-family: 'Sora', sans-serif; font-weight: 700; color: var(--accent); margin-bottom: 12px; font-size: 1rem; }
+    .outlet-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .outlet-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; font-size: 0.8rem; color: var(--text); }
+    .outlet-pill.soon { opacity: 0.6; border-style: dashed; }
+
+    /* SPHERE */
+    .sphere-section { background: linear-gradient(135deg, rgba(232,160,69,0.08), rgba(61,139,205,0.08)); border: 1px solid rgba(232,160,69,0.2); border-radius: var(--radius); padding: 28px; }
+    .sphere-title { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--heading); margin-bottom: 6px; }
+    .sphere-sub { color: var(--accent); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .sphere-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .sphere-features { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .sf { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+    .sf .sf-icon { font-size: 1.3rem; margin-bottom: 6px; }
+    .sf .sf-name { font-weight: 600; color: var(--heading); font-size: 0.88rem; margin-bottom: 3px; }
+    .sf .sf-desc { font-size: 0.78rem; color: var(--muted); }
+
+    /* FEST */
+    .fest-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; overflow: hidden; }
+    .fest-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .fc-gold::after { background: linear-gradient(90deg, #e8a045, #f5c97a); }
+    .fc-blue::after { background: linear-gradient(90deg, #3d8bcd, #6eb3f0); }
+    .fc-green::after { background: linear-gradient(90deg, #6ecf8e, #a8e6be); }
+    .fc-purple::after { background: linear-gradient(90deg, #9b5de5, #c77dff); }
+    .fn { font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--heading); margin-bottom: 4px; }
+    .fs { font-size: 0.78rem; color: var(--accent); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .fd { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .fst { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .fst span { font-size: 0.78rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; }
+    .fst strong { color: var(--text); }
+
+    /* ALUMNI */
+    .al-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+    .al-name { font-weight: 700; color: var(--heading); font-size: 0.95rem; }
+    .al-role { font-size: 0.8rem; color: var(--accent); margin-top: 3px; }
+    .al-note { font-size: 0.78rem; color: var(--muted); margin-top: 5px; }
+
+    /* DEPT */
+    .dept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+    .di { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px; font-size: 0.87rem; color: var(--text); display: flex; align-items: center; gap: 9px; }
+    .di::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; }
+    .step { display: flex; gap: 18px; }
+    .sn { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #0f1117; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .sc { padding-bottom: 26px; flex: 1; }
+    .sc h4 { font-weight: 600; color: var(--heading); margin-bottom: 3px; }
+    .sc p { font-size: 0.87rem; color: var(--muted); }
+
+    /* TIMING */
+    .timing-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1rem; }
+    .tp { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 20px; }
+    .tp .meal { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+    .tp .time { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+
+    /* MAP */
+    .map-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 3rem 2rem; text-align: center; }
+    .map-box .mi { font-size: 3rem; margin-bottom: 1rem; }
+    .map-box p { color: var(--muted); font-size: 0.95rem; max-width: 420px; margin: 0 auto; }
+    .map-box a { display: inline-block; margin-top: 1.2rem; background: var(--accent); color: #0f1117; font-weight: 700; font-size: 0.9rem; padding: 11px 24px; border-radius: 8px; text-decoration: none; }
+    .map-box a:hover { opacity: 0.85; }
+
+    footer { border-top: 1px solid var(--border); text-align: center; padding: 2.5rem 2rem; font-size: 0.82rem; color: var(--muted); }
+    footer span { color: var(--accent); }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 640px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-brand">Insti<span>Pedia</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#places">Places</a></li>
+    <li><a href="#departments">Depts</a></li>
+    <li><a href="#fests">Fests</a></li>
+    <li><a href="#food">Food</a></li>
+    <li><a href="#sphere">Sphere</a></li>
+    <li><a href="#alumni">Alumni</a></li>
+    <li><a href="#elections">Elections</a></li>
+    <li><a href="#transport">Transport</a></li>
+    <li><a href="#map">Map</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-badge" id="greet-badge">🎓 Freshers' Edition · IIT Madras</div>
+  <h1>Your guide to<br><span class="gold">life at Insti</span></h1>
+  <p class="hero-sub">Everything a fresher needs — landmarks, departments, fests, food, alumni, elections, transport. One file. Zero confusion.</p>
+  <a href="#about" class="hero-cta">Start Exploring ↓</a>
+  <div class="stat-row">
+    <div class="stat-chip"><div class="num">617</div><div class="lbl">Acres</div></div>
+    <div class="stat-chip"><div class="num">#1</div><div class="lbl">NIRF 2025</div></div>
+    <div class="stat-chip"><div class="num">#180</div><div class="lbl">QS World 2026</div></div>
+    <div class="stat-chip"><div class="num">10,000+</div><div class="lbl">Students</div></div>
+    <div class="stat-chip"><div class="num">233+</div><div class="lbl">Startups</div></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- QUICK LINKS -->
+<section>
+  <div class="eyebrow reveal">Navigate</div>
+  <h2 class="sec-title reveal">What do you want to know?</h2>
+  <p class="sec-lead reveal">Jump directly to any topic. No more hunting across six different sources.</p>
+  <div class="grid-tiles reveal">
+    <a href="#about" class="tile"><span class="ti">🏛️</span><span class="tl">About IITM</span><span class="td">Mission, rankings, campus</span></a>
+    <a href="#places" class="tile"><span class="ti">📍</span><span class="tl">Places & Clubs</span><span class="td">Buildings, sports, landmarks</span></a>
+    <a href="#departments" class="tile"><span class="ti">🔬</span><span class="tl">Departments</span><span class="td">All 16 departments</span></a>
+    <a href="#fests" class="tile"><span class="ti">🎉</span><span class="tl">Fests</span><span class="td">Saarang, Shaastra, E-Summit</span></a>
+    <a href="#food" class="tile"><span class="ti">🍽️</span><span class="tl">Mess & Food</span><span class="td">Messes, cafes, food outlets</span></a>
+    <a href="#sphere" class="tile"><span class="ti">🌐</span><span class="tl">Sphere</span><span class="td">New student facility</span></a>
+    <a href="#alumni" class="tile"><span class="ti">🌍</span><span class="tl">Alumni</span><span class="td">Notable alumni, mentorship</span></a>
+    <a href="#elections" class="tile"><span class="ti">🗳️</span><span class="tl">Elections</span><span class="td">SLC, HAC, AAC</span></a>
+    <a href="#transport" class="tile"><span class="ti">🚌</span><span class="tl">Transport</span><span class="td">Buses, metro, shuttle</span></a>
+    <a href="#map" class="tile"><span class="ti">🗺️</span><span class="tl">Campus Map</span><span class="td">Official layout PDF</span></a>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="eyebrow reveal">Overview</div>
+  <h2 class="sec-title reveal">About IIT Madras</h2>
+  <p class="sec-lead reveal">Established in 1959 with German technical assistance, IITM is consistently India's #1 ranked institution — and one of Asia's most beautiful campuses.</p>
+  <div class="grid-2 reveal">
+    <div class="ib">
+      <h4>🏆 Rankings (2025–26)</h4>
+      <ul>
+        <li>#1 NIRF Overall — 7th consecutive year</li>
+        <li>#1 NIRF Engineering — since 2016</li>
+        <li>#1 NIRF Innovation 2025</li>
+        <li>#2 NIRF Research Institutions 2025</li>
+        <li>#180 QS World University Rankings 2026</li>
+        <li>#31 QS Global Engineering & Technology 2026</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>📍 Location & Gates</h4>
+      <ul>
+        <li>617-acre campus carved from Guindy National Park</li>
+        <li>~10 km from Chennai Airport, ~12 km from Chennai Central</li>
+        <li>Main Gate — Sardar Patel Road</li>
+        <li>Velachery Gate — pedestrians & two-wheelers</li>
+        <li>Taramani Gate — pedestrians & two-wheelers</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🏫 Campus at a Glance</h4>
+      <ul>
+        <li>16 academic departments, 100+ labs</li>
+        <li>674 faculty, 10,000+ students (UG, PG, and PhD)</li>
+        <li>233+ startups via IITM Incubation Cell</li>
+        <li>IITM Research Park connected via Industry-Academic Bridge</li>
+        <li>Discovery Campus at Thaiyur — 163 acres, 36 km away</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🐾 Campus Wildlife</h4>
+      <ul>
+        <li>Part of protected forest from Guindy National Park</li>
+        <li>Home to Blackbuck — India's protected antelope</li>
+        <li>Chital (spotted deer), bonnet macaques, peacocks, snakes</li>
+        <li>Prakriti Wildlife Club runs guided nature walks</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🎓 New Programmes 2024–25</h4>
+      <ul>
+        <li>BTech in Computational Engineering & Mechanics (CEM)</li>
+        <li>BTech in Instrumentation & Biomedical Engineering (iBME)</li>
+        <li>MTech in Electric Vehicles</li>
+        <li>Sports Excellence Admission (SEA) — first IIT to do so</li>
+        <li>Fine Arts Admission (FACE)</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🎯 Mission</h4>
+      <ul>
+        <li>Create a community of learning for professional & ethical knowledge application</li>
+        <li>Pursue and disseminate research findings</li>
+        <li>Provide knowledge-based services to society and industry</li>
+        <li>Build national capabilities in Science, Technology, Humanities & Management</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- DEPARTMENTS -->
+<section id="departments">
+  <div class="eyebrow reveal">Academics</div>
+  <h2 class="sec-title reveal">Departments</h2>
+  <p class="sec-lead reveal">16 academic departments spanning engineering, pure sciences, humanities, and management.</p>
+  <div class="dept-grid reveal">
+    <div class="di">Aerospace Engineering</div>
+    <div class="di">Applied Mechanics & Biomedical Engineering</div>
+    <div class="di">Biotechnology</div>
+    <div class="di">Chemical Engineering</div>
+    <div class="di">Chemistry</div>
+    <div class="di">Civil Engineering</div>
+    <div class="di">Computer Science & Engineering</div>
+    <div class="di">Electrical Engineering</div>
+    <div class="di">Engineering Design</div>
+    <div class="di">Humanities & Social Sciences</div>
+    <div class="di">Management Studies (DoMS)</div>
+    <div class="di">Mathematics</div>
+    <div class="di">Mechanical Engineering</div>
+    <div class="di">Metallurgical & Materials Engineering</div>
+    <div class="di">Ocean Engineering</div>
+    <div class="di">Physics</div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- PLACES -->
+<section id="places">
+  <div class="eyebrow reveal">Campus</div>
+  <h2 class="sec-title reveal">Major Landmarks</h2>
+  <p class="sec-lead reveal">Gajendra Circle (GC) is your north star. All campus directions are described relative to it.</p>
+  <div class="grid-3 reveal">
+    <div class="card"><span class="ci">⭕</span><h3>Gajendra Circle (GC)</h3><p>Heart of campus. All roads, bus routes and directions are described relative to GC. Great spot to hang out at night.</p></div>
+    <div class="card"><span class="ci">📚</span><h3>Central Library</h3><p>Five-storeyed near GC. Ajanta reading hall open 24/7. Has a book bank for semester-long textbook borrowing.</p></div>
+    <div class="card"><span class="ci">🎭</span><h3>Open Air Theatre (OAT)</h3><p>Amphitheatre between GC and the hostel area. Film Club screens movies every Saturday night. Saarang shows held here.</p></div>
+    <div class="card"><span class="ci">🔬</span><h3>Centre For Innovation (CFI)</h3><p>24/7 student laboratory near the academic complex. Home to robotics, aero, coding, and all technical teams.</p></div>
+    <div class="card"><span class="ci">🏛️</span><h3>Students' Activity Centre (SAC)</h3><p>Registration venue, music room, large auditorium. Houses 4 badminton courts (wooden floor). Institute Day and Convocation held here.</p></div>
+    <div class="card"><span class="ci">💼</span><h3>Career Pathway Centre</h3><p>Career Development Cell, Entrepreneurship Cell, Placement & Internship Office — all under one roof.</p></div>
+    <div class="card"><span class="ci">🏥</span><h3>Institute Hospital & Wellness</h3><p>Primary health care on First Cross Road. Wellness Centre (DoST Building, 1st floor) for mental health consultations.</p></div>
+    <div class="card"><span class="ci">🚀</span><h3>IITM Research Park</h3><p>India's first university-based research park. Connected to campus via Industry-Academic Bridge. 233+ startups incubated here.</p></div>
+    <div class="card"><span class="ci">🏢</span><h3>NAC-I & NAC-II</h3><p>New Academic Complex I near Campus Café. NAC-II adjacent to Ocean Engineering Department and opposite Biotech-II. State-of-the-art lecture halls and labs.</p></div>
+    <div class="card"><span class="ci">📡</span><h3>Central Lecture Theatre (CLT)</h3><p>Air-conditioned hall in Humanities & Sciences block. Used for quizzes, special lectures, and cultural events.</p></div>
+    <div class="card"><span class="ci">🏢</span><h3>Administration Block</h3><p>Near GC. Academic, Accounts, Engineering Unit, Security, and Heritage Centre all here. Heritage Centre open to visitors.</p></div>
+    <div class="card"><span class="ci">🎪</span><h3>IC&SR Building</h3><p>Opposite HSS on Alumni Avenue. Auditorium has hosted Dr. Kiran Bedi, Kamal Haasan, and many distinguished personalities.</p></div>
+    <div class="card"><span class="ci">🌿</span><h3>Ellora</h3><p>Hangout spot next to DoMS building. Popular for chilling between classes and study breaks.</p></div>
+    <div class="card"><span class="ci">🛍️</span><h3>Quark Student Space</h3><p>Near Saraswathi hostel. Restaurant on ground floor. 81 Lounge for student activities on 1st floor.</p></div>
+    <div class="card"><span class="ci">🧘</span><h3>UTIL & DoST</h3><p>Up-Top Interaction Lounge on roof of DoST Building. Wellness Centre for mental health also in DoST premises, 1st floor.</p></div>
+    <div class="card"><span class="ci">🏨</span><h3>Guest Houses</h3><p>Bose-Einstein Guest House (BEGH) for VIPs and institute guests. Taramani Guest House (TGH) for guests, faculty, and students.</p></div>
+    <div class="card"><span class="ci">🔧</span><h3>Central Skill Training & Fabrication Facility (CSTF)</h3><p>Formerly the Central Workshop, established in 1959. Trains students in foundry, welding, CNC machines, electronics, carpentry, fitting and more. ISO 9001 certified. Open to all BTech students for hands-on manufacturing skills.</p></div>
+  </div>
+
+  <!-- SPORTS -->
+  <h2 class="sub-h reveal">Sports Facilities</h2>
+  <div class="grid-2 reveal">
+    <div class="ib">
+      <h4>🏸 Sitara Indoor Sports Complex</h4>
+      <ul>
+        <li>Inaugurated November 4, 2024 — funded by an anonymous alumnus</li>
+        <li>4 world-class badminton courts</li>
+        <li>Multiple table tennis courts</li>
+        <li>Gallery on mezzanine floor</li>
+        <li>Open tennis court on terrace</li>
+        <li>Houses Centre of Excellence in Sports Science & Analytics (CESSA)</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🏋️ Gymkhana Sports Complex</h4>
+      <ul>
+        <li>Opposite Taramani Guest House (Indoor Sports Complex 1)</li>
+        <li>Well-equipped gym — weight training, cardio machines, free weights</li>
+        <li>Weightlifting, squash courts, table tennis</li>
+        <li>Gym membership via Gymkhana registration portal</li>
+        <li>Students & scholars get gratis access to all facilities via Gymkhana membership</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🏊 Swimming Pool & Stadium</h4>
+      <ul>
+        <li>Olympic-standard swimming pool opposite SAC Building</li>
+        <li>One shallow pool and one deep pool</li>
+        <li>Registration required separately for pool access</li>
+        <li>Manohar C Watsa Stadium — Delhi Avenue, 400m synthetic track</li>
+        <li>Stadium closed 10 AM – 4 PM daily; open early morning & evening</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🏏 Outdoor Courts & Grounds</h4>
+      <ul>
+        <li>KS Narayanan Cricket Ground (Chemplast, near Dept. of Engg. Design)</li>
+        <li>Football & Hockey ground near Dept. of Biotechnology</li>
+        <li>2 Volleyball Courts (mud), 2 Basketball Courts (concrete)</li>
+        <li>Tennis court near basketball courts</li>
+        <li>Skating at Sangam Ground near Saraswathi Hostel (booking required)</li>
+        <li>Badminton at Mandakini hostel (2nd, 4th, 6th, 8th floors)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CLUBS -->
+  <h2 class="sub-h reveal">Clubs</h2>
+  <div class="grid-2 reveal">
+    <div class="ib">
+      <h4>🎨 Sangam — Cultural Clubs</h4>
+      <ul>
+        <li>16+ cultural clubs — music, dance, drama, fine arts, e-sports</li>
+        <li>Regional clubs help freshers combat homesickness</li>
+        <li>Freshie events held at the start of each odd semester</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🎬 Film Club</h4>
+      <ul>
+        <li>Movies at OAT every Saturday night — cult classics to latest releases</li>
+        <li>Membership card or ticket required for entry</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🌿 Prakriti — Wildlife Club</h4>
+      <ul>
+        <li>Explores IITM's unique ecological campus diversity</li>
+        <li>Guided nature walks, talks, and observation programmes</li>
+        <li>Contact: prakriti@iitm.ac.in</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🏆 Inter-Hostel Sports (Schroeter & Dean's Trophy)</h4>
+      <ul>
+        <li>Schroeter — annual inter-hostel sports competition, all year round</li>
+        <li>Dean's Trophy — 8 non-Inter IIT events to boost participation</li>
+        <li>IITM won the 25th General Championship at Inter-IIT 2025</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AMENITIES -->
+  <h2 class="sub-h reveal">Banks & Services</h2>
+  <div class="grid-2 reveal">
+    <div class="ib">
+      <h4>🏦 Banks & ATMs</h4>
+      <ul>
+        <li>SBI — Opposite KV School, Bonn Avenue (~200m from GC)</li>
+        <li>SBI ATM 1: Opposite KV | ATM 2: Taramani Guest House</li>
+        <li>Canara Bank — Campus Shopping Centre, Delhi Avenue</li>
+        <li>HDFC Bank — on campus (ATM near Nilgiri area)</li>
+        <li>ICICI Bank — Near OHM & Near Nilgiri Mess</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>📮 Post Office & Schools</h4>
+      <ul>
+        <li>Post Office — Opposite SBI, Bonn Avenue (railway ticket booking also here)</li>
+        <li>Kendriya Vidyalaya IITM — Bonn Avenue</li>
+        <li>Vana Vani Matriculation HSS — Bonn Avenue, ~1.2 km from GC</li>
+        <li>Prime Mart (stationery) — near CCW Office</li>
+        <li>7 Star Beauty Salon — Narmada Basement</li>
+        <li>Speed Buy Cycle Repair — near Sangam Ground</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- FESTS -->
+<section id="fests">
+  <div class="eyebrow reveal">Events</div>
+  <h2 class="sec-title reveal">Major Fests</h2>
+  <p class="sec-lead reveal">IITM's fests are among India's biggest student-run events. As a fresher, these will be your first taste of Insti life.</p>
+  <div class="grid-2 reveal">
+    <div class="fest-card fc-gold">
+      <div class="fn">Saarang</div>
+      <div class="fs">Annual Cultural Festival</div>
+      <div class="fd">India's second oldest college cultural festival, founded in 1974. Five days of music, dance, drama, arts, FMX shows, celebrity performances, flea market. Saarang 2025 (51st edition) featured Amit Trivedi and Ritviz.</div>
+      <div class="fst">
+        <span><strong>80,000+</strong> footfall</span>
+        <span><strong>January</strong> annually</span>
+        <span><strong>5 days</strong></span>
+        <span><strong>Since 1974</strong></span>
+      </div>
+    </div>
+    <div class="fest-card fc-blue">
+      <div class="fn">Shaastra</div>
+      <div class="fs">Annual Technical Festival</div>
+      <div class="fd">One of India's largest student-run tech festivals, ISO 9001:2015 certified. Robot wars, AI workshops, rover challenges, drone events, armed forces exhibitions. Shaastra 2026 (27th edition) theme was "Artifacts of Arcade".</div>
+      <div class="fst">
+        <span><strong>80,000+</strong> visitors</span>
+        <span><strong>January</strong> annually</span>
+        <span><strong>80 events</strong></span>
+        <span><strong>750+ organisers</strong></span>
+      </div>
+    </div>
+    <div class="fest-card fc-green">
+      <div class="fn">E-Summit</div>
+      <div class="fs">Entrepreneurship Summit</div>
+      <div class="fd">Flagship event by E-Cell IITM. Founders, investors, startup showcases, pitch competitions, and panel discussions with India's top entrepreneurs. ISO, UNESCO, and Startup India certified — the first student-run entrepreneurial gathering in India to receive all three.</div>
+      <div class="fst">
+        <span><strong>15,000+</strong> attendees</span>
+        <span><strong>Feb–Mar</strong> annually</span>
+        <span><strong>1,000+</strong> founders</span>
+        <span><strong>400+</strong> colleges</span>
+      </div>
+    </div>
+    <div class="fest-card fc-purple">
+      <div class="fn">Schroeter & Inter-Hostel Events</div>
+      <div class="fs">All Year Long</div>
+      <div class="fd">Inter-hostel sports, cultural battles, and academic competitions throughout the year. First chances to represent your hostel and bond with batchmates. IITM won the 2025 General Championship at Inter-IIT Sports Meet.</div>
+      <div class="fst">
+        <span><strong>All year</strong></span>
+        <span><strong>20 hostels</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- FOOD -->
+<section id="food">
+  <div class="eyebrow reveal">Food</div>
+  <h2 class="sec-title reveal">Mess & Food</h2>
+  <p class="sec-lead reveal">Three centralised mess halls, plus a growing number of food outlets on campus. Here's everything you need to know.</p>
+
+  <!-- MESSES -->
+  <h2 class="sub-h reveal" style="margin-top:0">Centralised Mess Halls</h2>
+  <p class="reveal" style="color:var(--muted);font-size:0.9rem;margin-bottom:1.2rem;">All hostel canteens were closed around 2010. Dining is now centralised in three main halls. Each hostel has vending machines only.</p>
+  <div class="timing-row reveal">
+    <div class="tp"><div class="meal">☀️ Breakfast</div><div class="time">7:00 AM – 9:30 AM</div></div>
+    <div class="tp"><div class="meal">🍛 Lunch</div><div class="time">12:00 PM – 2:30 PM</div></div>
+    <div class="tp"><div class="meal">🍵 Evening Snacks</div><div class="time">4:30 PM – 5:30 PM</div></div>
+    <div class="tp"><div class="meal">🌙 Dinner</div><div class="time">7:00 PM – 9:30 PM</div></div>
+  </div>
+  <div class="grid-3 reveal" style="margin-top:1.5rem;">
+    <div class="card">
+      <span class="ci">🏔️</span>
+      <h3>Himalaya Mess</h3>
+      <p>Giant central mess with multiple caterers — South Indian, North Indian, and various food options. Separate veg and non-veg sections. Most popular mess on campus.</p>
+      <span class="tag tg">I-17 & J-17</span><span class="tag tb">Veg & Non-Veg</span>
+    </div>
+    <div class="card">
+      <span class="ci">🌶️</span>
+      <h3>Vindhya Mess</h3>
+      <p>Serves South Indian and other options — idli, dosa, vada, sambar, rasam, curd. Located at I-14 on the campus map.</p>
+      <span class="tag tg">I-14</span><span class="tag tb">Veg & Non-Veg</span>
+    </div>
+    <div class="card">
+      <span class="ci">🍃</span>
+      <h3>Nilgiri Mess</h3>
+      <p>Located at G-19 near Krishna Hostel area. Now also has London Waffles on the ground floor.</p>
+      <span class="tag tg">G-19</span><span class="tag tb">Veg & Non-Veg</span>
+    </div>
+  </div>
+
+  <!-- CAMPUS CAFE -->
+  <h2 class="sub-h reveal">Campus Café</h2>
+  <p class="reveal" style="color:var(--muted);font-size:0.9rem;margin-bottom:1.5rem;">The Campus Café building in the academic zone is the main food hub. Ground floor has the main canteen. <strong style="color:var(--text);">Second floor</strong> has Food For Thoughts (FFT) food court. The <strong style="color:var(--text);">first floor</strong> was recently renovated and multiple new outlets launched in June 2025.</p>
+
+  <div class="new-banner reveal">
+    <h4>🆕 New Outlets — 1st Floor, Campus Café (Launched June 12, 2025)</h4>
+    <div class="outlet-list">
+      <div class="outlet-pill">Morning Tiffin <span style="color:var(--muted);font-size:0.72rem">South Indian Veg</span></div>
+      <div class="outlet-pill">Pattukottai Mess <span style="color:var(--muted);font-size:0.72rem">South Indian Non-Veg</span></div>
+      <div class="outlet-pill">Sauce Boy <span style="color:var(--muted);font-size:0.72rem">Chinese</span></div>
+      <div class="outlet-pill">Grill Republic <span style="color:var(--muted);font-size:0.72rem">Shawarma & Grill</span></div>
+      <div class="outlet-pill">Tibbs Frankie <span style="color:var(--muted);font-size:0.72rem">Variety Frankies</span></div>
+      <div class="outlet-pill">Metro Cafe <span style="color:var(--muted);font-size:0.72rem">Beverages & Snacks</span></div>
+      <div class="outlet-pill">Meat & Eat <span style="color:var(--muted);font-size:0.72rem">Fried Chicken</span></div>
+      <div class="outlet-pill">Hizli Ice <span style="color:var(--muted);font-size:0.72rem">Ice Creams & Milkshakes</span></div>
+      <div class="outlet-pill soon">🔜 Dominos <span style="color:var(--muted);font-size:0.72rem">Coming July 2025</span></div>
+      <div class="outlet-pill soon">🔜 Subway <span style="color:var(--muted);font-size:0.72rem">Coming July 2025</span></div>
+    </div>
+  </div>
+
+  <!-- ALL FOOD SPOTS -->
+  <h2 class="sub-h reveal">All Food Spots on Campus</h2>
+  <div class="food-grid reveal">
+    <div class="food-card">
+      <div class="fname">Campus Café (Ground Floor)</div>
+      <div class="fcuisine">Main Canteen</div>
+      <div class="floc">📍 Near CFI Building</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">FFT (Food For Thoughts)</div>
+      <div class="fcuisine">2nd Floor</div>
+      <div class="floc">📍 Campus Café Building</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Zaitoon Restaurant</div>
+      <div class="fcuisine">Arabian — Shawarma, Biryani, Grills</div>
+      <div class="floc">📍 Near Saraswathi Hostel</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">CCD (Café Coffee Day)</div>
+      <div class="fcuisine">Coffee, Pastries, Snacks</div>
+      <div class="floc">📍 Near DoMS</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Usha Café</div>
+      <div class="fcuisine">Snacks & Light Bites</div>
+      <div class="floc">📍 Near Vindhya Mess</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Nescafé</div>
+      <div class="fcuisine">Coffee & Beverages</div>
+      <div class="floc">📍 Near HDFC Bank</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Dosa Food Truck</div>
+      <div class="fcuisine">South Indian Street Food</div>
+      <div class="floc">📍 Opposite Narmada Hostel</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Rotorman's Food Truck</div>
+      <div class="fcuisine">Fast Food</div>
+      <div class="floc">📍 Opposite Narmada Hostel</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Dollar Cafe</div>
+      <div class="fcuisine">Fast Food — Veg & Non-Veg</div>
+      <div class="floc">📍 Near HDFC Bank</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Maaran Snacks</div>
+      <div class="fcuisine">Snacks & Quick Bites</div>
+      <div class="floc">📍 Near ICICI Bank</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Creamstone</div>
+      <div class="fcuisine">Ice Creams & Desserts</div>
+      <div class="floc">📍 Near ICICI Bank</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">London Waffles</div>
+      <div class="fcuisine">Waffles & Desserts</div>
+      <div class="floc">📍 Nilgiri Mess, Ground Floor</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Isthara (Food Aggregator)</div>
+      <div class="fcuisine">Multiple Cuisines</div>
+      <div class="floc">📍 HFC</div>
+    </div>
+    <div class="food-card">
+      <div class="fname">Zomato / Swiggy</div>
+      <div class="fcuisine">Food Delivery from Chennai</div>
+      <div class="floc">📍 Swarnamukhi Hostel entrance, Taramani Gate, Velachery Gate</div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- SPHERE -->
+<section id="sphere">
+  <div class="eyebrow reveal">Student Ecosystem</div>
+  <h2 class="sec-title reveal">Spheres of Insti</h2>
+  <p class="sec-lead reveal">The student ecosystem at IIT Madras is divided into multiple spheres that oversee academics, sports, culture, innovation, entrepreneurship, governance, wellness, and student life.</p>
+
+  <!-- ACADEMIC AFFAIRS -->
+  <div class="sphere-section reveal" style="margin-bottom:1.5rem;">
+    <div class="sphere-title">🎓 Academic Affairs</div>
+    <div class="sphere-sub">Academics · Careers · Professional Development</div>
+    <div class="sphere-desc">Academic Affairs focuses on academics, career preparation, placements, internships, and professional development.</div>
+    <div class="sphere-features">
+      <div class="sf"><div class="sf-icon">💼</div><div class="sf-name">Placement & Internship Cell</div><div class="sf-desc">Bridge between students and recruiters for internships and placements</div></div>
+      <div class="sf"><div class="sf-icon">📊</div><div class="sf-name">Case Club</div><div class="sf-desc">Consulting & case-solving workshops and competitions</div></div>
+      <div class="sf"><div class="sf-icon">🧩</div><div class="sf-name">No Code Club</div><div class="sf-desc">Build projects without extensive programming knowledge</div></div>
+      <div class="sf"><div class="sf-icon">📈</div><div class="sf-name">Finance Club</div><div class="sf-desc">Finance, investing, markets, and related competitions</div></div>
+      <div class="sf"><div class="sf-icon">🚀</div><div class="sf-name">Career Development Cell</div><div class="sf-desc">Career guidance, skill development, and professional readiness</div></div>
+      <div class="sf"><div class="sf-icon">🎯</div><div class="sf-name">DAMP</div><div class="sf-desc">Department Academic Mentorship — seniors guiding juniors</div></div>
+    </div>
+  </div>
+
+  <!-- SPORTS -->
+  <div class="sphere-section reveal" style="margin-bottom:1.5rem;">
+    <div class="sphere-title">🏆 Sports</div>
+    <div class="sphere-sub">Sportsmanship · Inter-College Events · Transparency</div>
+    <div class="sphere-desc">The Sports sphere oversees all sporting activities and competitions within the institute, under the Sports Organizing Committee (SOC).</div>
+    <div class="sphere-features">
+      <div class="sf"><div class="sf-icon">🥇</div><div class="sf-name">Jimmy George</div><div class="sf-desc">Major annual sporting event</div></div>
+      <div class="sf"><div class="sf-icon">⚽</div><div class="sf-name">Sports Fest</div><div class="sf-desc">Inter-college sporting festival</div></div>
+      <div class="sf"><div class="sf-icon">🏅</div><div class="sf-name">GF&KR</div><div class="sf-desc">Key inter-institute competition</div></div>
+    </div>
+  </div>
+
+  <!-- SLC -->
+  <div class="sphere-section reveal" style="margin-bottom:1.5rem;">
+    <div class="sphere-title">⚖️ Student Legislative Council (SLC)</div>
+    <div class="sphere-sub">Governance · Representation · Policy</div>
+    <div class="sphere-desc">SLC serves as the legislative wing of the student governance structure, representing students across departments and hostels.</div>
+    <div class="sphere-features">
+      <div class="sf"><div class="sf-icon">🏛️</div><div class="sf-name">Department Legislators</div><div class="sf-desc">Represent interests of students in academic departments</div></div>
+      <div class="sf"><div class="sf-icon">🏠</div><div class="sf-name">Hostel Legislators</div><div class="sf-desc">Represent interests of hostel residents</div></div>
+      <div class="sf"><div class="sf-icon">📋</div><div class="sf-name">Secretariat</div><div class="sf-desc">Handles the administrative functioning of the council</div></div>
+      <div class="sf"><div class="sf-icon">🗺️</div><div class="sf-name">Public Policy Club</div><div class="sf-desc">Platform for discussions on governance and public policy</div></div>
+    </div>
+  </div>
+
+  <!-- SEC & HOSTEL & ACGR in a row -->
+  <div class="grid-3 reveal" style="margin-bottom:1.5rem;">
+    <div class="ib">
+      <h4>🗳️ Student Election Commission (SEC)</h4>
+      <ul>
+        <li>Conducts all student elections within the institute</li>
+        <li>Ensures transparency and integrity in the electoral process</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🏠 Hostel Affairs</h4>
+      <ul>
+        <li>Hostel Council — primary student body for hostel residents</li>
+        <li>MMCC & CMGFS — mess and canteen committees</li>
+        <li>Focuses on residential life and student welfare</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🌐 Wellness Structure</h4>
+      <ul>
+        <li>SAATHI — peer support initiative for students</li>
+        <li>MITR — fosters a healthy campus environment</li>
+        <li>Supports emotional well-being and mental health</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ACGR -->
+  <div class="sphere-section reveal" style="margin-bottom:1.5rem;">
+    <div class="sphere-title">🌍 Alumni, Corporate & Global Relations (ACGR)</div>
+    <div class="sphere-sub">Alumni · Corporate Outreach · Global Engagement</div>
+    <div class="sphere-desc">ACGR facilitates engagement with alumni, corporate partners, international students, and global communities.</div>
+    <div class="sphere-features">
+      <div class="sf"><div class="sf-icon">🤝</div><div class="sf-name">ARC</div><div class="sf-desc">Alumni Relations Cell</div></div>
+      <div class="sf"><div class="sf-icon">🏢</div><div class="sf-name">Corporate Relations Cell</div><div class="sf-desc">Corporate outreach and partnerships</div></div>
+      <div class="sf"><div class="sf-icon">📍</div><div class="sf-name">Chennai 36</div><div class="sf-desc">Includes Heritage Club &amp; Institute Branding Cell</div></div>
+      <div class="sf"><div class="sf-icon">🎙️</div><div class="sf-name">IITM TV</div><div class="sf-desc">Media content on IIT Madras activities</div></div>
+      <div class="sf"><div class="sf-icon">✈️</div><div class="sf-name">Global Engagement</div><div class="sf-desc">Promotes international collaborations</div></div>
+    </div>
+  </div>
+
+  <!-- GENERAL AFFAIRS -->
+  <div class="grid-2 reveal" style="margin-bottom:1.5rem;">
+    <div class="ib">
+      <h4>📢 General Affairs</h4>
+      <ul>
+        <li>Extra Mural Lectures — talks by distinguished speakers</li>
+        <li>IViL — campus life initiative</li>
+        <li>Institute WebOps — campus web platforms</li>
+        <li>DMC (Sajag) & CFMC — media and communication</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🏛️ Independent Student Body (ISB)</h4>
+      <ul>
+        <li>Operates independently from the main student government</li>
+        <li>Focuses on student-led initiatives and self-governance</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CO-CURRICULAR -->
+  <div class="sphere-section reveal" style="margin-bottom:1.5rem;">
+    <div class="sphere-title">⚙️ Co-Curricular Affairs</div>
+    <div class="sphere-sub">Technology · Innovation · Entrepreneurship · Fests</div>
+    <div class="sphere-desc">Co-Curricular Affairs provides students opportunities beyond academics through technology, innovation, entrepreneurship, and institute festivals.</div>
+
+    <h3 class="sub-h" style="margin-top:1.2rem;">TechSoc</h3>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1rem;">Institute Technical Society — the launchpad for students to kickstart their technical journey at IIT Madras. Runs Freshie Roadmaps, Inter Hostel Events, and BuildSchool (10 weeks).</p>
+
+    <h3 class="sub-h">Centre for Innovation (CFI)</h3>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.8rem;">CFI serves as a hub for innovation, technical projects, and interdisciplinary collaboration — open 24/7.</p>
+    <div class="grid-3" style="margin-bottom:1rem;">
+      <div class="ib">
+        <h4>🔬 CFI Clubs (14)</h4>
+        <ul>
+          <li>3D Printing Club</li><li>Aero Club</li>
+          <li>Electronics Club</li><li>Horizon</li>
+          <li>iBot Club</li><li>Product Design Club</li>
+          <li>Programming Club</li><li>Team Sahaay</li>
+          <li>Team Envisage</li><li>WebOps & Blockchain Club</li>
+          <li>AI Club</li><li>Biotech Club</li>
+          <li>Mathematics Club</li><li>Cybersecurity Club</li>
+        </ul>
+      </div>
+      <div class="ib">
+        <h4>🏎️ Competition Teams</h4>
+        <ul>
+          <li>Raftar</li><li>Abhiyaan</li><li>Anveshak</li>
+          <li>Avishkar Hyperloop</li><li>Abhyuday</li>
+          <li>Agnirath</li><li>iGEM</li><li>Amogh</li>
+        </ul>
+      </div>
+      <div class="ib">
+        <h4>🏢 CFI Management</h4>
+        <ul>
+          <li>Project Management Team</li>
+          <li>Branding & Engagement</li>
+          <li>Finance</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Entrepreneurship Cell (E-Cell)</h3>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.8rem;">Promotes entrepreneurial thinking and startup culture among students.</p>
+    <div class="grid-3" style="margin-bottom:1rem;">
+      <div class="ib">
+        <h4>📂 E-Cell Verticals / Teams</h4>
+        <ul>
+          <li>Corporate Relations</li><li>Development & Associations</li>
+          <li>Editorial & Research</li><li>Entrepreneurship Club (E-Club)</li>
+          <li>Events & Networking</li><li>Finance & Operations</li>
+          <li>Graphic Design & Media</li><li>Marketing & Public Relations</li>
+          <li>Startup Services</li><li>Student Relations & Outreach</li>
+          <li>Web and Mobile Operations</li><li>Growth & Strategic Initiatives</li>
+        </ul>
+      </div>
+      <div class="ib">
+        <h4>🌱 Nirmaan (Pre-Incubation)</h4>
+        <ul>
+          <li>Workspace & Seed Funding</li>
+          <li>Mentorship & Networking</li>
+          <li>Connect with alumni & entrepreneurs</li>
+          <li>Experience startup highs and lows</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Shaastra — Annual Technical Festival</h3>
+    <div class="grid-3">
+      <div class="ib">
+        <h4>🛠️ Shaastra Verticals</h4>
+        <ul>
+          <li>Design, Ambience & Media (DAM)</li><li>Envisage</li>
+          <li>Events & Workshops</li><li>Evolve</li><li>Finance</li>
+          <li>Operations & Infrastructure</li><li>Planning</li>
+          <li>Publicity</li><li>Quality Management System</li>
+          <li>Shows & Exhibitions</li>
+          <li>Sponsorship & Public Relations</li>
+          <li>Web Operations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CULTURAL AFFAIRS -->
+  <div class="sphere-section reveal">
+    <div class="sphere-title">🎭 Cultural Affairs</div>
+    <div class="sphere-sub">Arts · Performance · Creative Expression</div>
+    <div class="sphere-desc">Cultural Affairs provides students opportunities to explore creativity, performance, and artistic expression through clubs, fests, and competitions.</div>
+
+    <h3 class="sub-h">Sangam — Cultural Clubs</h3>
+    <div class="grid-3" style="margin-bottom:1rem;">
+      <div class="ib">
+        <h4>🎨 Performance & Arts</h4>
+        <ul>
+          <li>Choreo Club</li><li>Classical Arts Club</li>
+          <li>Comedy Club</li><li>Drama Club</li>
+          <li>Fine Arts Club</li><li>Music Club</li>
+        </ul>
+      </div>
+      <div class="ib">
+        <h4>📝 Literary & Mind</h4>
+        <ul>
+          <li>Oratory Club</li><li>Quiz Club</li>
+          <li>Word Games Club</li><li>Writing Club</li>
+          <li>Informals Club</li>
+        </ul>
+      </div>
+      <div class="ib">
+        <h4>🎮 Lifestyle & Media</h4>
+        <ul>
+          <li>Culinary Arts Club</li><li>Design & VFX Club</li>
+          <li>Esports Club</li><li>Fashion Club</li>
+          <li>Media Club</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Saarang — Annual Cultural Festival</h3>
+    <div class="grid-3" style="margin-bottom:1rem;">
+      <div class="ib">
+        <h4>🎪 Saarang Verticals</h4>
+        <ul>
+          <li>Dev & Mobile Operations</li><li>Events</li>
+          <li>Facilities & Requirements</li><li>Finance</li>
+          <li>Media, Ambience & Design</li><li>Publicity & Hospitality</li>
+          <li>Marketing & Sales</li><li>Professional Shows</li>
+          <li>Quality Management Systems</li>
+          <li>Safety & Security</li>
+          <li>Sponsorship & PR</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Contingent</h3>
+    <p style="font-size:0.88rem;color:var(--muted);">Represents IIT Madras in external cultural competitions — Inter IIT Cultural Meet and Inter College Competitions.</p>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ALUMNI -->
+<section id="alumni">
+  <div class="eyebrow reveal">Network</div>
+  <h2 class="sec-title reveal">Alumni Network</h2>
+  <p class="sec-lead reveal">A global community that funds, mentors, and opens doors for every student who walks through Insti's gates.</p>
+  <div class="grid-2 reveal">
+    <div class="ib">
+      <h4>🌏 Global Reach</h4>
+      <ul>
+        <li>Alumni across USA, Europe, Southeast Asia, Middle East</li>
+        <li>IIT Madras Alumni Association (IITMAA) as the main body</li>
+        <li>Local chapters in Chennai, Bengaluru, Delhi + international chapters</li>
+        <li>AlumNext portal for networking, jobs, mentorship</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🤝 Mentorship & Careers</h4>
+      <ul>
+        <li>Internship and job placement via formal and informal channels</li>
+        <li>Alumni return for talks, seminars, and recruitment drives</li>
+        <li>AlumNext: exclusive job postings and mentorship connections</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🚀 Entrepreneurship</h4>
+      <ul>
+        <li>233+ startups supported by IITM Incubation Cell</li>
+        <li>Alumni fund and mentor startups from the IITM ecosystem</li>
+        <li>Notable companies: Zoho, Ather Energy, Freshworks, Junglee</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>💰 Giving Back</h4>
+      <ul>
+        <li>Kris Gopalakrishnan donated ₹100 crore for neuroscience centres</li>
+        <li>Anonymous alumnus funded the entire Sitara Sports Complex (2024)</li>
+        <li>Scholarships, Chair Professorships, lab & hostel development</li>
+      </ul>
+    </div>
+  </div>
+  <h2 class="sub-h reveal">Notable Alumni</h2>
+  <div class="grid-2 reveal" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
+    <div class="al-card"><div class="al-name">Kris Gopalakrishnan</div><div class="al-role">Co-founder, Infosys</div><div class="al-note">Donated ₹100 crore to IITM for research centres</div></div>
+    <div class="al-card"><div class="al-name">Sridhar Vembu</div><div class="al-role">Founder & CEO, Zoho Corporation</div><div class="al-note">Built a $1B+ company known for rural employment</div></div>
+    <div class="al-card"><div class="al-name">Arvind Krishna</div><div class="al-role">Chairman & CEO, IBM</div><div class="al-note">Led IBM's $34 billion acquisition of Red Hat</div></div>
+    <div class="al-card"><div class="al-name">Parag Agrawal</div><div class="al-role">Former CEO, Twitter/X</div><div class="al-note">Led one of the world's most influential platforms</div></div>
+    <div class="al-card"><div class="al-name">Anant Agarwal</div><div class="al-role">MIT Professor & edX Co-founder</div><div class="al-note">Revolutionized online education globally</div></div>
+    <div class="al-card"><div class="al-name">Arvind Subramanian</div><div class="al-role">Former Chief Economic Advisor, Govt. of India</div><div class="al-note">Shaped India's economic policy for years</div></div>
+    <div class="al-card"><div class="al-name">N. V. Ramana</div><div class="al-role">Former Chief Justice of India</div><div class="al-note">Rose to India's highest judicial post</div></div>
+    <div class="al-card"><div class="al-name">Venky Harinarayan</div><div class="al-role">Co-founder, Junglee (acquired by Amazon)</div><div class="al-note">Played a key role at Amazon.com in the 1990s</div></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ELECTIONS -->
+<section id="elections">
+  <div class="eyebrow reveal">Governance</div>
+  <h2 class="sec-title reveal">Elections at IIT Madras</h2>
+  <p class="sec-lead reveal">Annual elections let students shape their own campus. Every vote matters.</p>
+  <div class="grid-2 reveal">
+    <div class="ib"><h4>🏛️ Students' Legislative Council (SLC)</h4><ul><li>Primary legislative body of the student community</li><li>Addresses concerns and collaborates with administration</li></ul></div>
+    <div class="ib"><h4>🏠 Hostel Affairs Council (HAC)</h4><ul><li>Accommodation, dining, and hostel welfare matters</li><li>Works with Office of Hostel Management (OHM)</li></ul></div>
+    <div class="ib"><h4>📖 Academic Affairs Council (AAC)</h4><ul><li>Curriculum feedback and academic policy improvements</li><li>Works with faculty to enhance academic environment</li></ul></div>
+    <div class="ib"><h4>🎪 Co-curricular Committees</h4><ul><li>Oversee cultural, technical, sports, and literary clubs</li><li>Coordinate inter-hostel and inter-collegiate events</li></ul></div>
+  </div>
+  <h2 class="sub-h reveal">How Elections Work</h2>
+  <div class="steps reveal">
+    <div class="step"><div class="sn">1</div><div class="sc"><h4>Eligibility</h4><p>All registered students can vote. Candidates must have minimum academic standing and no disciplinary actions.</p></div></div>
+    <div class="step"><div class="sn">2</div><div class="sc"><h4>Nomination</h4><p>File nominations with peer endorsements and a manifesto outlining your goals for the term.</p></div></div>
+    <div class="step"><div class="sn">3</div><div class="sc"><h4>Campaigning</h4><p>Debates, posters, and social media within institute guidelines. Digital campaigning has grown significantly.</p></div></div>
+    <div class="step"><div class="sn">4</div><div class="sc"><h4>Voting</h4><p>Secret ballots or secure electronic voting to ensure confidentiality and integrity.</p></div></div>
+    <div class="step"><div class="sn">5</div><div class="sc"><h4>Results & Term</h4><p>Votes tallied transparently. Elected officials serve for one full academic year.</p></div></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- TRANSPORT -->
+<section id="transport">
+  <div class="eyebrow reveal">Getting Around</div>
+  <h2 class="sec-title reveal">Transport & Connectivity</h2>
+  <div class="grid-2 reveal">
+    <div class="ib">
+      <h4>🚌 City Buses</h4>
+      <ul>
+        <li>Madhya Kailash and CLRI/Cancer Institute — near Main Gate</li>
+        <li>Gandhi Mandapam and Guru Nanak College — near Velachery Gate</li>
+        <li>CMBT Koyambedu for outstation buses</li>
+        <li>Check MTC website for route numbers</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🚇 Metro & MRTS</h4>
+      <ul>
+        <li>Kasturba Nagar MRTS Station — 1.2 km from Main Gate</li>
+        <li>Little Mount Metro — ~3 km, 5–10 min by road</li>
+        <li>Guindy Metro — ~3.3 km, 5–10 min by road</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🚂 Trains</h4>
+      <ul>
+        <li>Guindy local train station — 3.3 km from campus</li>
+        <li>Outstation trains from Chennai Central (~12 km) and Egmore</li>
+        <li>Railway ticket booking at the campus Post Office (limited schedule)</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🚍 On-Campus Bus</h4>
+      <ul>
+        <li>Runs 6:15 AM – 9:30 PM every 15 minutes</li>
+        <li>Last bus: 10:00 PM (Main Gate → Bus Depot via GC)</li>
+        <li>Late-night on-call bus: 9:30 PM – 4:00 AM</li>
+        <li>Call Security: 044-2257 9999</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🛺 Autos & Cabs</h4>
+      <ul>
+        <li>Ola, Uber, Rapido all work well around IITM</li>
+        <li>Auto stands near Main Gate, Velachery Gate, Taramani Gate</li>
+        <li>Negotiate fares for autos; metered cabs more reliable</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>🚲 Cycling on Campus</h4>
+      <ul>
+        <li>Cycling is practical and popular on the 617-acre campus</li>
+        <li>Speed Buy Cycle Repair near Sangam Ground</li>
+        <li>Many students buy cycles — highly recommended for freshers</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- MAP -->
+<section id="map">
+  <div class="eyebrow reveal">Navigation</div>
+  <h2 class="sec-title reveal">Campus Map</h2>
+  <p class="sec-lead reveal">617 acres is a lot of ground. Download the official layout and study it before Day 1.</p>
+  <div class="map-box reveal">
+    <div class="mi">🗺️</div>
+    <p>Official IIT Madras campus layout — all buildings, hostels, departments, sports grounds, and common facilities with grid references.</p>
+    <a href="iitmMap.pdf" target="_blank">Download Campus Map PDF</a>
+  </div>
+  <div class="grid-2 reveal" style="margin-top:1.5rem;">
+    <div class="ib">
+      <h4>🏠 All 20 Hostels</h4>
+      <ul>
+        <li>Boys (15): Alakananda, Brahmaputra, Cauvery, Ganga, Godavari, Jamuna, Krishna, Mahanadhi, Mandakini, Narmada, Pampa, Saraswathi, Sindhu, Tamiraparani, Tapti</li>
+        <li>Girls (5): Sabarmati, Sarayu, Sharavathi, Swarnamukhi, Tunga, Bhadra</li>
+        <li>All named after Indian rivers</li>
+        <li>Freshers assigned to hostels upon matriculation</li>
+      </ul>
+    </div>
+    <div class="ib">
+      <h4>📍 Key Grid References</h4>
+      <ul>
+        <li>Himalaya Mess — I-17 & J-17</li>
+        <li>Vindhya Mess — I-14 | Nilgiri Mess — G-19</li>
+        <li>SAC — K-15 | OAT — H-15 & H-16</li>
+        <li>Swimming Pool — J-15 & J-16</li>
+        <li>Central Library — H-14 | Admin Block — G-14 & H-14</li>
+        <li>Hospital — G-12 & G-13 | CFI Lab — F-13</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+<footer>
+  <p>Made with ❤️ for IITM Freshers &nbsp;·&nbsp; <span>InstiPedia</span> &nbsp;·&nbsp; Data current as of 2025</p>
+  <p style="margin-top:6px;">Sources: IIT Madras official website, NIRF 2025, QS Rankings 2026, DoST Sports page, IITM Freshers' Handbook</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
